@@ -6,7 +6,7 @@ int main() {
     sf::VideoMode videoMode = *(new sf::VideoMode(800, 600));
 
     // Create a window object with specific dimensions and a title
-    sf::RenderWindow* window = new sf::RenderWindow(videoMode, "My SFML Window");
+    sf::RenderWindow* window = new sf::RenderWindow(videoMode, "SFML Window");
 
     // Game loop to keep the window open
     while (window->isOpen()) {
@@ -18,31 +18,33 @@ int main() {
         }
 
         // Clear the window
-        window->clear(sf::Color::Cyan);
+        window->clear(sf::Color::Blue);
 
-        // Draw your content here...
-        /* A Green circle */
+
+        // Draw a circle
         sf::CircleShape circle(50); // Radius 50
-        circle.setFillColor(sf::Color::Green);
-        circle.setPosition(10, 10); // Set position
+        circle.setFillColor(sf::Color::Red);
+        circle.setPosition(300, 300); // Set position
         window->draw(circle);
 
-        // A Red square
-        sf::RectangleShape square(sf::Vector2f(100, 100)); // 100x100 pixels
-        square.setPosition(150, 10); // Center of the window (approximately)
-        square.setFillColor(sf::Color::Red);
-        window->draw(square);
+        sf::Texture outscal_texture;
+        outscal_texture.loadFromFile("assets/textures/outscal_logo.png");
 
-        // A Blue Triangle
-        sf::ConvexShape triangle;
-        triangle.setPointCount(3);
-        //// points are set as a pendulum: top to bottom left to right
-        triangle.setPoint(0, sf::Vector2f(0, 100));
-        triangle.setPoint(1, sf::Vector2f(50, 0));
-        triangle.setPoint(2, sf::Vector2f(100, 100));
-        triangle.setFillColor(sf::Color::Blue);
-        triangle.setPosition(300, 10); // Position the origin of the triangle at (400, 300)
-        window->draw(triangle);
+        sf::Sprite outscal_sprite;
+        outscal_sprite.setTexture(outscal_texture);
+
+        outscal_sprite.setPosition(400, 20); // Position
+        outscal_sprite.setRotation(45); // Rotation in degrees
+        outscal_sprite.setScale(0.5, 0.5); // Scale factor
+
+        window->draw(outscal_sprite);
+
+        // Writing down random text
+        sf::Font font;
+        font.loadFromFile("assets/fonts/OpenSans.ttf");
+        sf::Text text("Hello SFML!", font, 50);
+        text.setFillColor(sf::Color::White);
+        window->draw(text);
 
         // Display what was drawn
         window->display();
