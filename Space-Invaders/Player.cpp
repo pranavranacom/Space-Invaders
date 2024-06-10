@@ -24,6 +24,14 @@ public:
 		player_score = newScore;
 	};
 
+	sf::Vector2f getPosition() {
+		return position;
+	}
+
+	void setPosition(sf::Vector2f newPos) {
+		position = newPos;
+	}
+
 	// New methods
 	void takeDamage() {};
 	void move() {};
