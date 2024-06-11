@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Player.cpp"
+#include "Header/GameService.h"
 
 int main() {
     // Define the video mode (dimensions)
