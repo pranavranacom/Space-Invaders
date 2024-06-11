@@ -3,12 +3,20 @@
 #include "Player.cpp"
 
 int main() {
-    sf::VideoMode videoMode = sf::VideoMode(800, 600); // Define the video mode (dimensions)
-    sf::RenderWindow window(videoMode, "SFML Window");  // Create a window object
+    // Define the video mode (dimensions)
+    sf::VideoMode videoMode = sf::VideoMode(800, 600);
 
-    Player player;  // Create the player object
-    player.player_texture.loadFromFile("assets/textures/player_ship.png"); // Load the player ship texture
-    player.player_sprite.setTexture(player.player_texture);  // Set the player sprite variable 
+    // Create a window object with specific dimensions and a title
+    sf::RenderWindow window(videoMode, "SFML Window");
+
+    // Using default constructor
+    Player player;
+
+    // Load the player ship texture  
+    player.player_texture.loadFromFile("assets/textures/player_ship.png");
+
+    // Set the player sprite variable to the player ship texture
+    player.player_sprite.setTexture(player.player_texture);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -20,19 +28,24 @@ int main() {
 
         // Handle keyboard input
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            player.move();
+            player.move(-0.05f * player.getMoveSpeed());
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            player.move();
+            player.move(0.05f * player.getMoveSpeed());
         }
 
         // Clear the window
-        window.clear(sf::Color::Blue); // this code will set a blue background color (optional)
-        player.player_sprite.setPosition(player.getPosition()); // Set the position of the player sprite
-        window.draw(player.player_sprite);    // Draw the player sprite
-        window.display(); // Display what was drawn
+        window.clear(sf::Color::Blue);
 
-    } // end while loop
+        // Set the position of the player sprite
+        player.player_sprite.setPosition(player.getPosition());
+
+        // Draw the player sprite
+        window.draw(player.player_sprite);
+
+        // Display what was drawn
+        window.display();
+    }
 
     return 0;
 }
