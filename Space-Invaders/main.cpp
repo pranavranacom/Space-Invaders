@@ -48,14 +48,14 @@ int main() {
         window.display();
     }*/
 
-    GameService game_service; //create object
-    game_service.ignite(); // this will 'ignite' or start the flow of our game
+    GameService* game_service = new GameService();
 
-    // while the game is running we will update the game loop
-    while (game_service.isRunning())
+    game_service->ignite();
+
+    while (game_service->isRunning())
     {
-        game_service.update();
-        game_service.render();
+        game_service->update();
+        game_service->render();
     }
 
     return 0;
