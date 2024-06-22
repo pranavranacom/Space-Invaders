@@ -1,54 +1,62 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Player.cpp"
+#include "Header/GameService.h"
 
 int main() {
-
-    // Define the video mode (dimensions)
-    sf::VideoMode videoMode = *(new sf::VideoMode(800, 600));
+    /*// Define the video mode (dimensions)
+    sf::VideoMode videoMode = sf::VideoMode(800, 600);
 
     // Create a window object with specific dimensions and a title
-    sf::RenderWindow* window = new sf::RenderWindow(videoMode, "SFML Window");
+    sf::RenderWindow window(videoMode, "SFML Window");
 
-    // Game loop to keep the window open
-    while (window->isOpen()) {
+    // Using default constructor
+    Player player;
+
+    // Load the player ship texture  
+    player.player_texture.loadFromFile("assets/textures/player_ship.png");
+
+    // Set the player sprite variable to the player ship texture
+    player.player_sprite.setTexture(player.player_texture);
+
+    while (window.isOpen()) {
         sf::Event event;
-        while (window->pollEvent(event)) {
+        while (window.pollEvent(event)) {
             // Check for window closure
             if (event.type == sf::Event::Closed)
-                window->close();
+                window.close();
+        }
+
+        // Handle keyboard input
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            player.move(-0.05f * player.getMoveSpeed());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            player.move(0.05f * player.getMoveSpeed());
         }
 
         // Clear the window
-        window->clear(sf::Color::Blue);
+        window.clear(sf::Color::Blue);
 
+        // Set the position of the player sprite
+        player.player_sprite.setPosition(player.getPosition());
 
-        // Draw a circle
-        sf::CircleShape circle(50); // Radius 50
-        circle.setFillColor(sf::Color::Red);
-        circle.setPosition(300, 300); // Set position
-        window->draw(circle);
-
-        sf::Texture outscal_texture;
-        outscal_texture.loadFromFile("assets/textures/outscal_logo.png");
-
-        sf::Sprite outscal_sprite;
-        outscal_sprite.setTexture(outscal_texture);
-
-        outscal_sprite.setPosition(400, 20); // Position
-        outscal_sprite.setRotation(45); // Rotation in degrees
-        outscal_sprite.setScale(0.5, 0.5); // Scale factor
-
-        window->draw(outscal_sprite);
-
-        // Writing down random text
-        sf::Font font;
-        font.loadFromFile("assets/fonts/OpenSans.ttf");
-        sf::Text text("Hello SFML!", font, 50);
-        text.setFillColor(sf::Color::White);
-        window->draw(text);
+        // Draw the player sprite
+        window.draw(player.player_sprite);
 
         // Display what was drawn
-        window->display();
-    }
+        window.display();
+    }*/
 
+    GameService* game_service = new GameService();
+
+    game_service->ignite();
+
+    while (game_service->isRunning())
+    {
+        game_service->update();
+        game_service->render();
+    }
+    
     return 0;
 }
