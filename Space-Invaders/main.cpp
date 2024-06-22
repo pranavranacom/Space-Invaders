@@ -57,6 +57,6 @@ int main() {
         game_service->update();
         game_service->render();
     }
-
+    
     return 0;
 }
