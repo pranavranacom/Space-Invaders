@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Header/EventService.h"
 #include "Player.cpp"
 #include "Header/GameService.h"
 
